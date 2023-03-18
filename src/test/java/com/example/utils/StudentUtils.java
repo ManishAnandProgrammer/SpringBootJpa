@@ -19,6 +19,7 @@ public class StudentUtils {
         Student student = new Student();
         student.setFirstName(name.firstName());
         student.setLastName(name.lastName());
+        student.setEmail(name.firstName().toLowerCase() + "@gmail.com");
         student.setAge(age);
 
         return student;

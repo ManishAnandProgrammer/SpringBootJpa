@@ -6,6 +6,7 @@ import com.example.utils.StudentUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.nio.charset.Charset;
@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
         classes = SpringJpaWithAuditingApplication.class)
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
+@Slf4j
 public class StudentControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -54,8 +55,9 @@ public class StudentControllerTest {
                 .andReturn();
 
         MockHttpServletResponse response = mvcResult.getResponse();
-        String contentAsString = response.getContentAsString();
-        Student savedStudent = objectMapper.readValue(contentAsString, Student.class);
+        String saveStudentResult = response.getContentAsString();
+        Student savedStudent = objectMapper.readValue(saveStudentResult, Student.class);
+
         assertEquals(studentToSave.getFirstName(), savedStudent.getFirstName());
     }
 }

@@ -23,4 +23,6 @@ public class Student extends Auditable {
     private String lastName;
 
     private Integer age;
+
+    private String email;
 }
