@@ -6,7 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "students")
+@Table(name = "students", uniqueConstraints = {
+    @UniqueConstraint(name = "student_unique_email", columnNames = "email")
+})
 @Getter
 @Setter
 public class Student extends Auditable {
@@ -26,8 +28,7 @@ public class Student extends Auditable {
     private Integer age;
 
     @Column(
-        name = "email", nullable = false,
-        columnDefinition = "TEXT", unique = true
+        name = "email", nullable = false, columnDefinition = "TEXT"
     )
     private String email;
 }
