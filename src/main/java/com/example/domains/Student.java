@@ -16,13 +16,18 @@ public class Student extends Auditable {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false, columnDefinition = "TEXT")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false, columnDefinition = "TEXT")
     private String lastName;
 
+    @Column(name = "age", nullable = false)
     private Integer age;
 
+    @Column(
+        name = "email", nullable = false,
+        columnDefinition = "TEXT", unique = true
+    )
     private String email;
 }
